@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="icon" type="image/webp" href="img/logo.webp">
+    <link href="https://fonts.googleapis.com/css2?family=Grand+Hotel&display=swap" rel="stylesheet">
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <title>Invitación || Generación 2022-2025 || COS</title>
+</head>
+
+<body class="pb-10 overflow-x-hidden">
+    <!-- Agregar elementos de fondo -->
+    <div class="bg-pattern"></div>
+    <div class="bg-overlay"></div>
+
+    <!-- Modal de música -->
+    <div id="musicModal" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
+        <div class="bg-white p-6 rounded-lg shadow-xl max-w-sm mx-4">
+            <h3 class="text-xl font-semibold mb-4">¿Deseas escuchar música de fondo?</h3>
+            <div class="flex justify-end space-x-4">
+                <button id="declineMusic" class="px-4 py-2 text-gray-600 hover:text-gray-800">
+                    No, gracias
+                </button>
+                <button id="acceptMusic" class="px-4 py-2 bg-[#014626] text-white rounded hover:bg-[#015c33]">
+                    Sí, reproducir
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Agregar el elemento de audio -->
+    <audio id="bgMusic" loop>
+        <source src="media/watc.mp3" type="audio/mp3">
+    </audio>
+
+    <!-- Botón flotante para música -->
+    <button id="musicToggle" class="fixed bottom-4 right-4 bg-[#014626] text-white w-12 h-12 rounded-full flex items-center justify-center shadow-lg z-50" data-playing="false">
+        <svg id="playIcon" class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14.752 11.168l-3.197-2.132A1 1 0 0010 9.87v4.263a1 1 0 001.555.832l3.197-2.132a1 1 0 000-1.664z" />
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+        </svg>
+        <svg id="pauseIcon" class="w-6 h-6 hidden" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 9v6m4-6v6m7-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+        </svg>
+    </button>
+
+    <div id="main-container" class="pb-20">
+        <div class="max-w-screen-md mx-auto px-4">
+            <div class="min-h-[100vh] flex flex-col justify-center">
+                <div class="w-full flex justify-center mt-4" data-aos="fade-down" data-aos-duration="1000">
+                    <img src="img/logo.webp" alt="Logo" class="w-1/2 max-w-[150px]">
+                </div>
+                <div class="w-full text-center mt-4">
+                    <p class="text-black text-2xl sm:text-3xl font-semibold drop-shadow-md" data-aos="fade-up" data-aos-duration="1000">Estas invitado a:</p>
+                    <p class="text-[#49A74B] mt-8 text-7xl sm:text-8xl drop-shadow-md mt-2" style="font-family: 'Grand Hotel', cursive;" data-aos="zoom-in" data-aos-duration="1000" data-aos-delay="300">
+                        Nuestra Graduación</p>
+                </div>
+                <div class="w-full flex justify-center mt-4" data-aos="fade-up" data-aos-duration="1000">
+                    <img src="img/canguroC.webp" alt="Canguro" class="w-1/2 max-w-[200px]">
+                </div>
+                <div class="w-full text-center mt-4" data-aos="fade-up" data-aos-duration="1000">
+                    <p class="text-[#49A74B] mt-4 text-6xl drop-shadow-md mt-2" style="font-family: 'Grand Hotel', cursive;">
+                        Generación<br>2022-2025</p>
+                </div>
+                <div class="w-full text-center mt-4">
+                    <p class="text-[#49A74B] mt-8 text-8xl sm:text-8xl drop-shadow-md mt-2" style="font-family: 'Grand Hotel', cursive;" data-aos="zoom-in" data-aos-duration="1000" data-aos-delay="300">
+                        Secundaria</p>
+                </div>
+            </div>
+
+            <div class="my-6 space-y-16">
+                <div class="space-y-8" data-aos="fade-up" data-aos-duration="1000">
+                    <div class="w-full text-center mt-10 sm:mt-20 px-2 sm:px-8">
+                        <div id="countdown" class="grid grid-cols-4 gap-4 max-w-2xl mx-auto">
+                            <div class="flex flex-col items-center">
+                                <span id="days" class="text-4xl font-bold text-dark">00</span>
+                                <span class="text-sm text-gray-600">Días</span>
+                            </div>
+                            <div class="flex flex-col items-center">
+                                <span id="hours" class="text-4xl font-bold text-dark">00</span>
+                                <span class="text-sm text-gray-600">Horas</span>
+                            </div>
+                            <div class="flex flex-col items-center">
+                                <span id="minutes" class="text-4xl font-bold text-dark">00</span>
+                                <span class="text-sm text-gray-600">Minutos</span>
+                            </div>
+                            <div class="flex flex-col items-center">
+                                <span id="seconds" class="text-4xl font-bold text-dark">00</span>
+                                <span class="text-sm text-gray-600">Segundos</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="w-full text-center mt-4">
+                        <p class="text-[#49A74B] mt-10 text-5xl drop-shadow-md mt-2" style="font-family: 'Grand Hotel', cursive;">
+                            Viernes 11 de julio 7 p.m.</p>
+                    </div>
+                </div>
+
+                <div class="space-y-8">
+                    <div class="w-full flex justify-center mt-4 relative max-h-[300px] sm:max-h-[500px]" id="imageCarousel" data-aos="fade-in" data-aos-delay="500" data-aos-duration="1000">
+                        <img src="img/hotel/logo.png" alt="Hotel" id="carouselImage" class="w-11/12 sm:w-2/3 mobile-img bg-white rounded-lg border-gray-300 border-2 drop-shadow-md transition-opacity duration-1000">
+                    </div>
+                    <div class="w-full text-center mt-4" data-aos="fade-in" data-aos-delay="500" data-aos-duration="1000">
+                        <p class="text-[#49A74B] font-semibold text-5xl drop-shadow-md mt-2" style="font-family: 'Grand Hotel', cursive;">
+                            Salón Aquiahuac</p>
+                    </div>
+                    <div class="w-full flex justify-center mt-8" data-aos="fade-in" data-aos-delay="500" data-aos-duration="1000">
+                        <a href="https://maps.app.goo.gl/wK8rW7zGjHYmNsFE9" target="_blank" class="bg-[#014626] text-white px-6 py-3 rounded-lg font-semibold hover:bg-[#015c33] transition-colors duration-300 drop-shadow-md">
+                            Ver ubicación
+                        </a>
+                    </div>
+                    <div class="w-full flex justify-center mt-4" data-aos="fade-in" data-aos-delay="500" data-aos-duration="1000">
+                        <img src="img/canguro.png" alt="Canguro" class="w-1/2 max-w-[150px]">
+                    </div>
+                    <div class="w-full text-center mt-4" data-aos="fade-in" data-aos-delay="500" data-aos-duration="1000">
+                        <p class="text-[#49A74B] mt-10 text-4xl drop-shadow-md mt-2" style="font-family: 'Grand Hotel', cursive;">
+                            Agradecemos su presencia</p>
+                    </div>
+                    <div class="w-full flex justify-center mt-8" data-aos="fade-in" data-aos-delay="500" data-aos-duration="1000">
+                        <a href="img/invitacion.png" download="Invitacion_Graduacion_2025.png" class="bg-[#014626] text-white px-6 py-3 rounded-lg font-semibold hover:bg-[#015c33] transition-colors duration-300 drop-shadow-md">
+                            Descargar invitación
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Inicializar AOS con configuración mejorada
+            AOS.init({
+                once: true,
+                duration: 1000,
+                offset: 50,
+                delay: 100,
+                mirror: false,
+                anchorPlacement: 'top-bottom'
+            });
+
+            // Reiniciar AOS cuando todo esté cargado
+            window.addEventListener('load', function() {
+                AOS.refresh();
+            });
+        });
+    </script>
+    <script src="countdown.js"></script>
+    <script src="carousel.js"></script>
+    <script src="music.js"></script>
+</body>
+
+</html>
